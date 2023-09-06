@@ -1,0 +1,17 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block header %}
+<h1>La Pythoneta</h1>
+<span class="subheading">Un Blog de Mati Gagliardi</span>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h3>{{ mensaje }}</h3>
+<div class="container px-4 px-lg-5">
+    <h3 class="subheading">ÚLTIMOS POSTEOS</h3>
+    <div class="col-md-10 col-lg-8 col-xl-7">
+        <hr class="my-4">
+        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Más posteos →</a></div>
+    </div>
+</div>
+{% endblock %}

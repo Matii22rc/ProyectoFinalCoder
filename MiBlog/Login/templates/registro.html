@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block header %}
+<h1>FORMULARIO REGISTRO</h1>
+<h3>{{ mensaje }}</h3>
+<form action="{% url 'Register' %}" method="POST"> {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Registrarse">
+</form>
+{% endblock %}
+
