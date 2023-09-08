@@ -4,10 +4,10 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import *
 from Posteos.views import *
 from .models import Avatar
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def inicio(request):
-    avatar=Avatar.objects.filter(user=request.user.id)[0].imagen.url
     posteos_recientes = Posteo.objects.order_by('-fecha_publicacion')[:2]
     return render(request, 'index.html', {'posteos':posteos_recientes, 'avatar':ObtenerAvatar(request)})
 

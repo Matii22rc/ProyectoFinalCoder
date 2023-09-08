@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block header %}
+<h1>Mensajes</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h3 style="color: green;">{{ mensajito }}</h3>
+{% if mensajes %}
+<ul>
+    {% for mensaje in mensajes %}
+    <li>
+        <a class="btn btn-info" href="{% url 'ver_mensaje' mensaje.id %}">{{ mensaje.asunto }}</a>
+        <br>
+        <span>De: {{ mensaje.remitente }}</span>
+        <br>
+        <span>Fecha de Envío: {{ mensaje.fecha_envio }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No tienes mensajes recibidos.</p>
+{% endif %}
+  <a class="btn btn-info" href="{% url 'enviar_mensaje' %}">Enviar un mensaje nuevo</a>
+{% endblock %}

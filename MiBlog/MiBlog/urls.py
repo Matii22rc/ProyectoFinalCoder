@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include("Login.urls")),
     path('', inicio, name="inicio"),
     path('', include("Posteos.urls")),
+    path('', include("Mensajes.urls")),
 ]
 
 from django.conf import settings

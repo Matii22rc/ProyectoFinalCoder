@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block header %}
+<h1>Ver mensaje</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h2>{{ mensaje.asunto }}</h2>
+  <p>De: {{ mensaje.remitente }}</p>
+  <p>Fecha de Envío: {{ mensaje.fecha_envio }}</p>
+  <p>Contenido:</p>
+  <p>{{ mensaje.contenido }}</p>
+  <a class="btn btn-info" href="{% url 'mensajes_recibidos' %}">Volver a los mensajes recibidos</a>
+{% endblock %}

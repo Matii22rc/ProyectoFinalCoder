@@ -1,0 +1,13 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block header %}
+<h1>Enviar mensaje</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+  <form action="{% url 'enviar_mensaje' %}" method="post">{% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit">Enviar Mensaje</button>
+  </form>
+  <a href="{% url 'mensajes_recibidos' %}">Volver a los mensajes recibidos</a>
+{% endblock %}
