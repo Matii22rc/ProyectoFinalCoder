@@ -1,0 +1,15 @@
+{% extends "padre.html" %}
+{% load static %}
+{% block header %}
+<h1 class="mb-5">AGREGANDO AVATAR DE: {{ usuario.username }} </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<form action="{% url 'agregarAvatar'  %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="AGREGAR AVATAR">
+    </form>
+{% endblock %}

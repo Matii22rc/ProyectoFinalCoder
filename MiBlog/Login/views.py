@@ -79,3 +79,20 @@ def ObtenerAvatar(request):
         return avatares[0].imagen.url
     else:
         return "media/avatares/avatar_por_defecto.jpg"
+
+@login_required
+def agregarAvatar(request):
+    if request.method=="POST":
+        form=AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])
+            avatarViejo=Avatar.objects.filter(user=request.user)
+            if len(avatarViejo)>0:
+                avatarViejo[0].delete()
+            avatar.save()
+            return redirect('inicio')
+        else:
+            return render(request, "agregarAvatar.html", {"form": form, "usuario": request.user})
+    else:
+        form=AvatarForm()
+        return render(request, "agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":ObtenerAvatar(request)})
