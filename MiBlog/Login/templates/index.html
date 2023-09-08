@@ -9,9 +9,21 @@
 <h3>{{ mensaje }}</h3>
 <div class="container px-4 px-lg-5">
     <h3 class="subheading">ÚLTIMOS POSTEOS</h3>
+    <hr class="my-4">
+    {% for post in posteos %}
+        {% if post in posteos %}
+            <h2>{{ post.titulo }}</h2>
+            <p>{{ post.subtitulo }}</p>
+            <img src="{{ post.imagen.url }}" style="width: 40%;" alt="Imagen del posteo">
+            <a class="btn btn-info" href="{% url 'detalle_posteo' post.id %}">Ver más</a>
+            <hr class="my-4">
+        {% else %}
+            <p>No hay posteos</p>
+        {% endif %}
+    {% endfor %}
     <div class="col-md-10 col-lg-8 col-xl-7">
         <hr class="my-4">
-        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Más posteos →</a></div>
+        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'posteos' %}">Más posteos →</a></div>
     </div>
 </div>
 {% endblock %}

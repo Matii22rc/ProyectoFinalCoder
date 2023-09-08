@@ -1,0 +1,13 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block header %}
+<h1>Crear posteo</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit">Publicar</button>
+</form>
+{% endblock %}

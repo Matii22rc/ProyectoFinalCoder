@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #para el login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from .forms import *
+from Posteos.views import *
 
 # Create your views here.
 def inicio(request):
-    return render(request, 'index.html')
+    posteos_recientes = Posteo.objects.order_by('-fecha_publicacion')[:2]
+    return render(request, 'index.html', {'posteos':posteos_recientes})
 
 def login_request(request):
 
@@ -20,11 +22,12 @@ def login_request(request):
             user = authenticate(username= usuario, password=contraseña)
             if user is not None:
                 login(request, user)
-                return render(request, "index.html", {"mensaje":f"Bienvenido {usuario}"})
+                return redirect('inicio')
             else:
                 return render(request, "login.html", {"mensaje":"Datos incorrectos"})
         else:
-            return render(request, "login.html", {"mensaje":"Formulario erroneo"})
+            form= AuthenticationForm()
+            return render(request, "login.html", {"mensaje":"Formulario erroneo", "form":form})
     else:
         form= AuthenticationForm()
         return render(request, "login.html", {"form": form})
@@ -45,3 +48,5 @@ def register(request):
             form=RegistroUsuarioForm()
             return render(request,"registro.html", {"form":form})
 
+def about(request):
+    return render(request, 'about.html')
