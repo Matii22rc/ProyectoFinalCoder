@@ -11,8 +11,8 @@
     <img src="{{ posteo.imagen.url }}" alt="Imagen del posteo" style="max-width: 70%;">
     <p>Autor: {{ posteo.autor.username }}</p>
     <p>Fecha de publicación: {{ posteo.fecha_publicacion }}</p>
-    {% if user.is_authenticated %}
-    <a style="color:forestgreen" href="{% url 'editar_posteo' posteo.id %}">Editar</a>
-    <a style="color:brown" href="{% url 'borrar_posteo' posteo.id %}">Borrar</a>
+    {% if user.is_staff %}
+    <a class="btn btn-success" href="{% url 'editar_posteo' posteo.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'borrar_posteo' posteo.id %}">Borrar</a>
     {% endif %}
 {% endblock %}

@@ -1,4 +1,6 @@
 from django.db import models
-# Create your models here.
+from django.contrib.auth.models import User
 
-
+class Avatar(models.Model):
+    imagen = models.ImageField(upload_to='avatares/',  null=True, blank = True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
