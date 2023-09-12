@@ -12,7 +12,7 @@ def enviar_mensaje(request):
             mensaje = formulario.save(commit=False)
             mensaje.remitente = request.user 
             mensaje.save()
-            return render(request, 'mensajes_recibidos.html', {"mensajito":"Mensaje enviado!"})
+            return render(request, 'mensajes_recibidos.html', {"mensajito":"Mensaje enviado!", 'avatar':ObtenerAvatar(request)})
     else:
         formulario = MensajeForm()
     return render(request, 'enviar_mensaje.html', {'formulario': formulario, 'avatar':ObtenerAvatar(request)})

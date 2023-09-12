@@ -20,7 +20,7 @@ def crear_posteo(request):
             nuevo_posteo = formulario.save(commit=False)
             nuevo_posteo.autor = request.user
             nuevo_posteo.save()
-            return redirect('detalle_posteo', posteo_id=nuevo_posteo.id)
+            return redirect('detalle_posteo', id=nuevo_posteo.id)
     else:
         formulario = PosteoForm()
     return render(request, 'crear_posteo.html', {'formulario': formulario, 'avatar':ObtenerAvatar(request)})
