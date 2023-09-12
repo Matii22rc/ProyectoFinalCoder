@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Mensaje
 from .forms import MensajeForm
 from django.contrib.auth.decorators import login_required
-from Login.views import ObtenerAvatar
+from Login.models import Avatar
 
 @login_required
 def enviar_mensaje(request):
@@ -12,10 +12,10 @@ def enviar_mensaje(request):
             mensaje = formulario.save(commit=False)
             mensaje.remitente = request.user 
             mensaje.save()
-            return redirect('mensajes_recibidos')
+            return render(request, 'mensajes_recibidos.html', {"mensajito":"Mensaje enviado!"})
     else:
         formulario = MensajeForm()
-    return render(request, 'enviar_mensaje.html', {'formulario': formulario, 'avatar':ObtenerAvatar(request), "mensajito":"Mensaje enviado!"})
+    return render(request, 'enviar_mensaje.html', {'formulario': formulario, 'avatar':ObtenerAvatar(request)})
 
 @login_required
 def mensajes_recibidos(request):
@@ -26,3 +26,10 @@ def mensajes_recibidos(request):
 def ver_mensaje(request, mensaje_id):
     mensaje = get_object_or_404(Mensaje, pk=mensaje_id)
     return render(request, 'ver_mensaje.html', {'mensaje': mensaje, 'avatar':ObtenerAvatar(request)})
+
+def ObtenerAvatar(request):
+    avatares=Avatar.objects.filter(user=request.user.id)
+    if len(avatares) != 0:
+        return avatares[0].imagen.url
+    else:
+        return "/media/avatares/avatar_por_defecto.jpg"

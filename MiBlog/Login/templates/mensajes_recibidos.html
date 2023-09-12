@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h3 style="color: green;">{{ mensajito }}</h3>
+<h3 style="color: green">{{ mensajito }}</h3>
 {% if mensajes %}
 <ul>
     {% for mensaje in mensajes %}
@@ -16,6 +16,7 @@
         <br>
         <span>Fecha de Envío: {{ mensaje.fecha_envio }}</span>
     </li>
+    <hr class="my-4">
     {% endfor %}
 </ul>
 {% else %}

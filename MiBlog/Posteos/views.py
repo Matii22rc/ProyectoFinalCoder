@@ -49,4 +49,4 @@ def ObtenerAvatar(request):
     if len(avatares) != 0:
         return avatares[0].imagen.url
     else:
-        return "media/avatares/avatar_por_defecto.jpg"
+        return "/media/avatares/avatar_por_defecto.jpg"
